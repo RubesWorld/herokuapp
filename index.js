@@ -8,14 +8,21 @@ const port = process.env.PORT || 9000;
 
 app.use(cors());
 app.use(express.json());
-//this is creating a path for heroku to get to 
+//this is creating a path for heroku to get to
 app.use(express.static(path.join(__dirname, "client/build", "index.html")));
 
 //APIs don't Receive data, just provide so no need for request. _ is placeholder
 
+app.use("/api/");
+
 app.use("/api/*", (_, res) => {
   res.json({ data: "THE API LIVES" });
 });
+
+app.use("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
 app.listen(port, () => {
   console.log(`Server is alive on port ${port}`);
 });
