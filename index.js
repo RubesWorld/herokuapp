@@ -13,8 +13,6 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 //APIs don't Receive data, just provide so no need for request. _ is placeholder
 
-app.use("/api/");
-
 app.use("/api/*", (_, res) => {
   res.json({ data: "THE API LIVES" });
 });
